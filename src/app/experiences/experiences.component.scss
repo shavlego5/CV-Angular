@@ -1,0 +1,98 @@
+@import "../../mixins.scss";
+
+.education,
+.experience {
+  @include container;
+
+  .first-line {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    span {
+      width: 45%;
+      @include input-parent;
+    }
+  }
+
+  .second-line {
+    margin-top: 100px;
+    span {
+      width: 100%;
+      @include input-parent;
+    }
+  }
+
+  .third-line {
+    display: flex;
+    justify-content: space-between;
+    span {
+      width: 45%;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+      }
+      select {
+        width: 45%;
+        height: 50px;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+      }
+    }
+  }
+
+  button {
+    width: 90px;
+    height: 35px;
+    background-color: #626ccc;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 50px 20px 0 0;
+    transition: 0.2s;
+
+    &:hover {
+      letter-spacing: 1px;
+    }
+
+    &:disabled {
+      letter-spacing: inherit;
+      cursor: auto;
+      background-color: rgba($color: #626ccc, $alpha: .5)
+    }
+  }
+}
+.next-step {
+  @include next-step;
+}
+
+@media only screen and (max-width: 1750px) {
+  .education,
+  .experience {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 1536px) {
+  .education,
+  .experience {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .education,
+  .experience {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .education,
+  .experience {
+    width: 96%;
+  }
+}

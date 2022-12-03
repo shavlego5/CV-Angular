@@ -1,0 +1,19 @@
+<div class="navigation">
+  <button routerLink="/" routerLinkActive="active" (click)="[fillWidth = 20, title = 'Personal Details', previous($event)]">
+    <mat-icon>person</mat-icon>
+    <span>Personal</span>
+  </button>
+  <button routerLink="/experiences" routerLinkActive="active" id="experiences"
+    (click)="[fillWidth = 50, title = 'My Experiences', previous($event)]">
+    <mat-icon> insert_drive_file</mat-icon>
+    <span>Experiences</span>
+  </button>
+  <button routerLink="/result" routerLinkActive="active" (click)="[fillWidth = 100, title = 'Result', previous($event)]"
+    id="last-link">
+    <mat-icon>edit</mat-icon>
+    <span>Result</span>
+  </button>
+  <div class="navigation__indicator">
+    <div class="navigation__indicator--fill" [style.width.%]="fillWidth"></div>
+  </div>
+</div>

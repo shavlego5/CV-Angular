@@ -1,0 +1,16 @@
+div {
+  text-align: center;
+  h1 {
+    color: rgba($color: #fff, $alpha: 0.5);
+    font-size: calc(100% + 1vw + 1vh);
+    display: inline;
+
+    span {
+      color: white;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,186 @@
+<div class="personal">
+  <header>
+    <h3>Personal Details</h3>
+    <h5>* - Required fields</h5>
+  </header>
+  <hr>
+  <form [formGroup]="form">
+    <section class="first-line">
+      <input style="display: none;" type="file" name="profile-image" #profileImageInput accept="image/*"
+        (change)="profile($event)">
+      <div class="profile-img" (mouseenter)="toggle()" (mouseleave)="toggle()">
+        <img #profileImage src="" *ngIf="this.showProfileImage" alt="">
+        <div class="profile-image-add" (click)="uploadImage()" *ngIf="!this.showProfileImage">
+          <mat-icon>camera_alt</mat-icon>
+          <span>Add photo (optional)</span>
+        </div>
+        <div class="profile-image-edit" *ngIf="this.showProfileImage" [ngClass]="hovered ? 'vissible' : ''">
+          <span (click)="uploadImage()">
+            <mat-icon>edit</mat-icon> Replace
+          </span>
+          <span>
+            <mat-icon>restore_from_trash</mat-icon> Remove
+          </span>
+        </div>
+      </div>
+      <div class="fullName">
+        <span>
+          <label for="firstName">First Name *
+            <p
+              *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched && !form.get('firstName')?.getError('minlength')">
+              - This field is required!
+            </p>
+            <p *ngIf="form.get('firstName')?.getError('minlength') && form.get('firstName')?.touched">
+              - First Name need contains min 2 letters!
+            </p>
+          </label>
+          <input type="text" name="firstName" (focus)="focus($event, 'e.g. Shavlego')" (blur)="blur($event)"
+            formControlName="firstName">
+        </span>
+        <span>
+          <label for="lastName">Last Name *
+            <p
+              *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched && !form.get('lastName')?.getError('minlength')">
+              - This field is required!
+            </p>
+            <p *ngIf="form.get('lastName')?.getError('minlength') && form.get('lastName')?.touched">
+              - Last Name need contains min 2 letters!
+            </p>
+          </label>
+          <input type="text" name="lastName" (focus)="focus($event, 'e.g. Botchorishvili')" (blur)="blur($event)"
+            formControlName="lastName">
+        </span>
+      </div>
+    </section>
+    <section class="second-line" formGroupName="contactInfo">
+      <span>
+        <label for="email">Email *
+          <p
+            *ngIf="form.get('contactInfo.email')?.invalid && form.get('contactInfo.email')?.touched && !form.get('contactInfo.email')?.getError('email')">
+            - This field is required!
+          </p>
+          <p *ngIf="form.get('contactInfo.email')?.getError('email') && form.get('contactInfo.email')?.touched">
+            - Please enter valid email!
+          </p>
+        </label>
+        <input type="email" name="email" (focus)="focus($event, 'e.g. example@gmail.com')" (blur)="blur($event)"
+          formControlName="email">
+      </span>
+      <span>
+        <label for="phone">Phone *
+          <p
+            *ngIf="form.get('contactInfo.phone')?.invalid && form.get('contactInfo.phone')?.touched && !form.get('contactInfo.phone')?.getError('pattern') && !form.get('contactInfo.phone')?.getError('minlength')">
+            - This field is required!
+          </p>
+          <p
+            *ngIf="form.get('contactInfo.phone')?.getError('pattern') && form.get('contactInfo.phone')?.touched && form.get('contactInfo.phone')?.getError('minlength')">
+            - Please enter valid phone number!
+          </p>
+          <p
+            *ngIf="form.get('contactInfo.phone')?.getError('minlength') && form.get('contactInfo.phone')?.touched && !form.get('contactInfo.phone')?.getError('pattern')">
+            - The number must contain at least 9 digits!
+          </p>
+        </label>
+        <input type="tel" name="phone" (focus)="focus($event, 'e.g. +995 599 54 87 26')" (blur)="blur($event)"
+          formControlName="phone" (change)="removeSpaces($event)">
+      </span>
+    </section>
+    <section class="third-line" formGroupName="contactInfo">
+      <span>
+        <label for="address">Address
+          <p *ngIf="form.get('contactInfo.address')?.getError('minlength') && form.get('contactInfo.address')?.touched">
+            - Address must contains min 4 letters!
+          </p>
+        </label>
+        <input type="text" name="address" (focus)="focus($event, 'e.g. Rustaveli Str. 1')" (blur)="blur($event)"
+          formControlName="address">
+      </span>
+    </section>
+    <section class="fourth-line" formGroupName="contactInfo">
+      <span>
+        <label for="zip">Zip code
+          <p
+            *ngIf="form.get('contactInfo.zip')?.getError('minlength') && form.get('contactInfo.zip')?.touched && !form.get('contactInfo.zip')?.getError('pattern')">
+            - Zip code must contains min 4 digits!
+          </p>
+          <p *ngIf="form.get('contactInfo.zip')?.getError('pattern') && form.get('contactInfo.zip')?.touched">
+            - Zip code must contains only numbers!
+          </p>
+        </label>
+        <input type="text" name="zip" (focus)="focus($event, 'e.g. 0123')" (blur)="blur($event)" formControlName="zip">
+      </span>
+      <span>
+        <label for="city">City/Town
+          <p *ngIf="form.get('contactInfo.city')?.getError('minlength') && form.get('contactInfo.city')?.touched">
+            - City/Town must contains min 3 letters!
+          </p>
+        </label>
+        <input type="text" name="city" (focus)="focus($event, 'e.g. Terjola')" (blur)="blur($event)"
+          formControlName="city">
+      </span>
+    </section>
+    <section class="fiveth-line">
+      <div class="container" [ngClass]="expanded ? 'expanded' : ''">
+        <section>
+          <span>
+            <label for="">Date of Birth</label>
+            <div>
+              <select formControlName="day">
+                <option value="Day">Day</option>
+                <option *ngFor="let n of days.days(31); let i = index">{{i + 1}}</option>
+              </select>
+              <select formControlName="month">
+                <option value="Month">Month</option>
+                <option *ngFor="let i of months.months()">{{i}}</option>
+              </select>
+              <select formControlName="year">
+                <option value="Year">Year</option>
+                <option *ngFor="let i of years.years(1950)">{{i}}</option>
+              </select>
+            </div>
+          </span>
+          <span>
+            <label for="gender">Gender</label>
+            <div>
+              <select name="gender" id="gender" formControlName="gender" value="Select">
+                <option value="Select">Select</option>
+                <option>Female</option>
+                <option>Male</option>
+              </select>
+            </div>
+          </span>
+        </section>
+        <section class="sixth-line" formGroupName="contactInfo">
+          <span formGroupName="links">
+            <label for="github">gitHub link *
+              <p *ngIf="form.get('contactInfo.links.github')?.invalid && form.get('contactInfo.links.github')?.touched">
+                - Please enter valid github link!
+              </p>
+            </label>
+            <input type="url" name="github" (focus)="focus($event, 'e.g. https://github.com/example/')"
+              (blur)="blur($event)" formControlName="github">
+          </span>
+          <span formGroupName="links">
+            <label for="linkedin">linkedin link *
+              <p
+                *ngIf="form.get('contactInfo.links.linkedin')?.getError('pattern') && form.get('contactInfo.links.linkedin')?.touched">
+                - Please enter valid linkedin link!
+              </p>
+            </label>
+            <input class="link" type="text" name="linkedin"
+              (focus)="focus($event, 'e.g. https://linkedin.com/example/')" (blur)="blur($event)"
+              formControlName="linkedin">
+          </span>
+        </section>
+      </div>
+      <button type="button" (click)="toggleAccordion()"> <span>{{expanded ? '-' : '+'}}</span> Additional
+        Information</button>
+    </section>
+    <button class="next-step" type="button" (click)="navigateToExperiences()" [disabled]="!form.valid"
+      [title]="!form.valid ? 'Required fields are empty!' : 'Next to experiences'">Next
+      Step</button>
+  </form>
+  <!-- <pre>
+    {{form.value | json}}
+  </pre> -->
+</div>

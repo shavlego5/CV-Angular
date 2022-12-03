@@ -1,0 +1,233 @@
+@import "../../mixins.scss";
+
+.personal {
+  @include container;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+
+    h5 {
+      color: red;
+    }
+  }
+
+  form {
+    .first-line {
+      display: flex;
+      justify-content: space-between;
+
+      .profile-img {
+        width: 200px;
+        height: 200px;
+        border: 4px dashed rgba($color: gray, $alpha: 0.5);
+        //border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+
+        &:hover {
+          border-color: rgba($color: gray, $alpha: 1);
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .profile-image-add {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          color: rgba($color: gray, $alpha: 0.5);
+
+          mat-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 4rem;
+            @include centered_item(center, center);
+            margin-bottom: 15px;
+          }
+
+          span {
+            font-size: 0.8rem;
+          }
+
+          &:hover {
+            color: gray;
+          }
+        }
+        .profile-image-edit {
+          width: 100%;
+          @include centered_item(center, start);
+          flex-direction: column;
+          background-color: rgba($color: #000000, $alpha: 0.6);
+          color: white;
+          padding: 15px 0 15px 40px;
+          position: absolute;
+          bottom: -100%;
+          left: 0;
+          transition: 0.3s;
+
+          span {
+            @include centered_item(center, center);
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            mat-icon {
+              margin-right: 10px;
+            }
+          }
+
+          &.vissible {
+            bottom: 0%;
+          }
+        }
+      }
+
+      .fullName {
+        width: calc(100% - 250px);
+        height: 200px;
+        span {
+          height: 50%;
+          @include input-parent;
+        }
+      }
+    }
+    .second-line {
+      margin-top: 100px;
+      display: flex;
+      justify-content: space-between;
+      span {
+        @include input-parent;
+        width: 45%;
+      }
+    }
+    .third-line {
+      margin-top: 100px;
+      span {
+        @include input-parent;
+        width: 100%;
+      }
+    }
+    .fourth-line {
+      margin-top: 200px;
+      display: flex;
+      justify-content: space-between;
+      span {
+        @include input-parent;
+        width: 45%;
+      }
+    }
+
+    .fiveth-line {
+      margin-top: 50px;
+      .container {
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        transition: 0.5s;
+
+        &.expanded {
+          height: 230px;
+        }
+
+        section {
+          display: flex;
+          justify-content: space-between;
+
+          span {
+            width: 45%;
+
+            div {
+              display: flex;
+              justify-content: space-between;
+            }
+            select {
+              width: 100px;
+              height: 50px;
+              outline: none;
+              cursor: pointer;
+              text-align: center;
+              margin-top: 20px;
+
+              &:nth-child(2) {
+                width: 150px;
+              }
+            }
+            &:nth-child(2) {
+              select {
+                min-width: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      button {
+        width: 100%;
+        height: 50px;
+        margin-top: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+
+        span {
+          display: block;
+          width: 20px;
+          height: 20px;
+          border: 1px solid black;
+          border-radius: 50%;
+          font-size: 1.4rem;
+          @include centered_item(center, center);
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .sixth-line {
+      margin-top: 100px;
+      display: flex;
+      justify-content: space-between;
+      span {
+        @include input-parent;
+        width: 45%;
+      }
+    }
+
+    .next-step {
+      @include next-step;
+    }
+  }
+}
+
+@media only screen and (max-width: 1750px) {
+  .personal {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 1536px) {
+  .personal {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .personal {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .personal {
+    width: 96%;
+  }
+}

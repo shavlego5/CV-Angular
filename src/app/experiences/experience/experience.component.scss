@@ -1,0 +1,50 @@
+.experience {
+    border-bottom: 1px solid gray;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        div {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            
+
+            span {
+                margin-right: 15px;
+                font-weight: bold;
+                text-transform: capitalize;
+
+                &:nth-child(2) {
+                    margin-left: 15px;
+                }
+            }
+
+            p {
+                margin: 0;
+                margin-left: 15px;
+                text-transform: capitalize;
+            }
+        }
+
+        button {
+          //display: block;  
+          margin-bottom: 5px;
+          border: none;
+          background: none;
+          outline: none;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+    }
+}

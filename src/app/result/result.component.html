@@ -1,0 +1,33 @@
+<div class="result">
+    <div class="first-line">
+        <div class="image">
+            <img src={{data.image}} alt="profile image" #image>
+        </div>
+        <div class="personal-info">
+            <h1>{{data.form.firstName}} {{data.form.lastName}}</h1>
+            <h5 *ngIf="data.form.day || data.form.month || data.form.year">{{data.form.day}} {{data.form.month}} {{data.form.year}}</h5>
+            <h5 *ngIf="data.form.gender">{{data.form.gender}}</h5>
+            <h5>{{data.form.contactInfo.phone}}</h5>
+            <h5>{{data.form.contactInfo.email}}</h5>
+            <h5 *ngIf="data.form.contactInfo.address">{{data.form.contactInfo.address}}</h5>
+            <h5 *ngIf="data.form.contactInfo.zip || data.form.contactInfo.city">{{data.form.contactInfo.zip}} {{data.form.contactInfo.city}}</h5>
+        </div>
+    </div>
+    <div class="second-line">
+        <h3>Education and Qualifications</h3>
+        <div  *ngFor="let edu of data1.education">
+            <span>{{edu.degree}} - <p>{{edu.school}} - {{edu.city}}</p></span>
+            <span>{{edu.startDate.month}} {{edu.startDate.year}}  -  {{edu.endDate.month}} {{edu.endDate.year}}</span>
+        </div>
+        <h3>Work Experience</h3>
+        <div  *ngFor="let exp of data1.experience">
+            <span>{{exp.job}} - <p>{{exp.employer}} - {{exp.city}}</p></span>
+            <span>{{exp.startDate.month}} {{exp.startDate.year}}  -  {{exp.endDate.month}} {{exp.endDate.year}}</span>
+        </div>
+    </div>
+    <div class="last-line">
+      <a href={{data.form.contactInfo.links.github}} target="_blank" *ngIf="data.form.contactInfo.links.github">{{data.form.contactInfo.links.github}}</a>
+      <a href={{data.form.contactInfo.links.linkedin}} target="_blank" *ngIf="data.form.contactInfo.links.linkedin">{{data.form.contactInfo.links.linkedin}}</a>
+    </div>
+    <span>Created By <a href="https://www.shavlego.com.ge/" target="_blank">Shavlego Botchorishvili</a></span>
+</div>

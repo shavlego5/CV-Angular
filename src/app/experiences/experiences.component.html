@@ -1,0 +1,154 @@
+<div class="education" [formGroup]="form1">
+  <h3>Education and Qualifications</h3>
+  <hr>
+  <app-education *ngFor="let edu of education" [degree1]="edu.degree" [school1]="edu.school"
+    [startDate1]="edu.startDate.month + ' ' + edu.startDate.year"
+    [endDate1]="edu.endDate.month == 'Present' ? 'Present' : edu.endDate.month + ' ' + edu.endDate.year"
+    (deleteEdu)="deleteEdu($event)">
+  </app-education>
+  <form formGroupName="education">
+    <section class="first-line">
+      <span>
+        <label for="degree">Degree
+          <p *ngIf="form1.get('education.degree')?.getError('minlength') && form1.get('education.degree')?.touched">
+            - Degree need contains min 4 letters!
+          </p>
+        </label>
+        <input type="text" name="degree" (focus)="focus($event, 'e.g. Bachelor of Science')" (blur)="blur($event)"
+          formControlName="degree">
+      </span>
+      <span>
+        <label for="city">City/Town
+          <p *ngIf="form1.get('education.city')?.getError('minlength') && form1.get('education.city')?.touched">
+            - City/Town need contains min 4 letters!
+          </p>
+        </label>
+        <input type="text" name="city" (focus)="focus($event, 'e.g. Terjola')" (blur)="blur($event)"
+          formControlName="city">
+      </span>
+    </section>
+    <section class="second-line">
+      <span>
+        <label for="school">School
+          <p *ngIf="form1.get('education.school')?.getError('minlength') && form1.get('education.school')?.touched">
+            - School need contains min 4 letters!
+          </p>
+        </label>
+        <input type="text" name="school" (focus)="focus($event, 'e.g. I. J. State University')" (blur)="blur($event)"
+          formControlName="school">
+      </span>
+    </section>
+    <section class="third-line">
+      <span>
+        <p>Start Date</p>
+        <div formGroupName="startDate">
+          <select formControlName="month">
+            <option value="Month">Month</option>
+            <option *ngFor="let i of months.months()">{{i}}</option>
+          </select>
+          <select formControlName="year" (change)="startYear($event)">
+            <option value="Year">Year</option>
+            <option *ngFor="let i of years.years(1950)">{{i}}</option>
+          </select>
+        </div>
+      </span>
+      <span>
+        <p>End Date</p>
+        <div formGroupName="endDate">
+          <select formControlName="month" (change)="checkPresentEdu($event)">
+            <option value="Present">Present</option>
+            <option *ngFor="let i of months.months()">{{i}}</option>
+          </select>
+          <select formControlName="year" *ngIf="!isPresentEdu">
+            <option value="Year">Year</option>
+            <option *ngFor="let i of years.years(startyear)">{{i}}</option>
+          </select>
+        </div>
+      </span>
+    </section>
+    <button type="button" (click)="resetEducation()">Reset</button>
+    <button type="button" (click)="saveEducation()"
+      [disabled]="!form1.controls['education'].valid ? true : false">Save</button>
+  </form>
+</div>
+
+<div class="experience" [formGroup]="form1">
+  <h3>Work Experience</h3>
+  <hr>
+  <app-experience *ngFor="let exp of experience" [job1]="exp.job" [employer1]="exp.employer"
+    [startDate1]="exp.startDate.month + ' ' + exp.startDate.year"
+    [endDate1]="exp.endDate.month == 'Present' ? 'Present' : exp.endDate.month + ' ' + exp.endDate.year"
+    (deleteExp)="deleteExp($event)">
+  </app-experience>
+  <form formGroupName="experience">
+    <section class="first-line">
+      <span>
+        <label for="job">Job Title
+          <p *ngIf="form1.get('experience.job')?.getError('minlength') && form1.get('experience.job')?.touched">
+            - Job Title need contains min 4 letters!
+          </p>
+        </label>
+        <input type="text" name="job" (focus)="focus($event, 'e.g. Sales Manager')" (blur)="blur($event)"
+          formControlName="job">
+      </span>
+      <span>
+        <label for="city">City/Town
+          <p *ngIf="form1.get('experience.city')?.getError('minlength') && form1.get('experience.city')?.touched">
+            - City/Town need contains min 4 letters!
+          </p>
+        </label>
+        <input type="text" name="city" (focus)="focus($event, 'e.g. Tbilisi')" (blur)="blur($event)"
+          formControlName="city">
+      </span>
+    </section>
+    <section class="second-line">
+      <span>
+        <label for="employer">Employer
+          <p
+            *ngIf="form1.get('experience.employer')?.getError('minlength') && form1.get('experience.employer')?.touched">
+            - Employer need contains min 4 letters!
+          </p>
+        </label>
+        <input type="text" name="employer" (focus)="focus($event, 'e.g. I. J. State University')" (blur)="blur($event)"
+          formControlName="employer">
+      </span>
+    </section>
+    <section class="third-line">
+      <span>
+        <p>Start Date</p>
+        <div formGroupName="startDate">
+          <select formControlName="month">
+            <option value="Month">Month</option>
+            <option *ngFor="let i of months.months()">{{i}}</option>
+          </select>
+          <select formControlName="year" (change)="startYear($event)">
+            <option value="Year">Year</option>
+            <option *ngFor="let i of years.years(1950)">{{i}}</option>
+          </select>
+        </div>
+      </span>
+      <span>
+        <p>End Date</p>
+        <div formGroupName="endDate">
+          <select formControlName="month" (change)="checkPresentExp($event)">
+            <option value="Present">Present</option>
+            <option *ngFor="let i of months.months()">{{i}}</option>
+          </select>
+          <select formControlName="year" *ngIf="!isPresentExp">
+            <option value="Year">Year</option>
+            <option *ngFor="let i of years.years(startyear)">{{i}}</option>
+          </select>
+        </div>
+      </span>
+    </section>
+    <button type="button" (click)="resetExperience()">Reset</button>
+    <button type="button" (click)="saveExperience()"
+      [disabled]="!form1.controls['experience'].valid ? true : false">Save</button>
+  </form>
+  <!-- <pre>
+    {{form1.value | json}}
+  </pre> -->
+</div>
+
+<button class="next-step" type="button" (click)="navigateToResult()" [disabled]="!form1.valid"
+  [title]="!form1.valid ? 'Please set all fields valid!' : 'Next to Result'">Result</button>

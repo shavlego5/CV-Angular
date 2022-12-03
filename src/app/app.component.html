@@ -1,0 +1,5 @@
+<div></div>
+<app-logo></app-logo>
+<app-title [title]="activeLink"></app-title>
+<app-navigation (linkName)="linkName($event)"></app-navigation>
+<router-outlet (isValidated)="isValidated($event)"></router-outlet>

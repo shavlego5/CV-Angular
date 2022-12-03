@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: custom;
+  src: url(./assets/fonts/RobotoSlab-VariableFont_wght.ttf);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: custom, Arial, Helvetica, sans-serif;
+}
+
+body,
+html {
+  height: 100vh;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  position: relative;
+}
